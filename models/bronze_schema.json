@@ -1,0 +1,16 @@
+{
+	"$schema":"http//:json-schema.org/draft-07/schema",
+	"title":"Bronze Clickstream Event",
+	"type":"object",
+	"additionalProperties": true,
+	"propertied":{
+		"user_id": { "type":["string","null"] },
+		"session_id": { "type":["string","null"] },
+		"page_url": { "type":["string","null"] },
+		"timestamp": { "type":["string","null"] },
+		"referrer": { "type":["string","null"] },
+		"ip": { "type":["string","null"] },
+	},
+	"required":["user_id","session_id","page_url", "timestamp"]
+}
+		
