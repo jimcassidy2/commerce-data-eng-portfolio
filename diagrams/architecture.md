@@ -1,6 +1,5 @@
-```mermaid
-
 ### Architecture
+```mermaid
 
 flowchart LR
   subgraph Ingestion [Bronze: Ingestion]
@@ -39,3 +38,4 @@ flowchart LR
   S --> G3
   O -. schedules .- B
   M -. observability .- B
+  ```
