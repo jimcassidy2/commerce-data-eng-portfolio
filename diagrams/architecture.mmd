@@ -1,7 +1,5 @@
 ```mermaid
 
-### Architecture
-
 flowchart LR
   subgraph Ingestion [Bronze: Ingestion]
     A[Raw Clickstream CSV<br/>data/bronze/...]
@@ -39,3 +37,4 @@ flowchart LR
   S --> G3
   O -. schedules .- B
   M -. observability .- B
+  ```
