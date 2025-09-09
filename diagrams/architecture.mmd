@@ -1,0 +1,40 @@
+### Architecture
+```mermaid
+
+flowchart LR
+  subgraph Ingestion [Bronze: Ingestion]
+    A[Raw Clickstream CSV<br/>data/bronze/...]
+    K[(Kafka - later)]
+  end
+
+  subgraph Processing [Silver: Processing]
+    B[Apache Beam<br/>Parse + Clean + Enrich]
+    V[Schema Validation<br/>(JSON Schema)]
+    DLQ[[Dead-Letter Queue<br/>(invalid/unclean)]]
+  end
+
+  subgraph Storage [Silver Output]
+    S[JSONL (dev) → Parquet (prod)<br/>data/silver/... partitioned by event_date]
+  end
+
+  subgraph Serving [Gold: Serving]
+    G1[Sessions & Funnels]
+    G2[Daily Metrics]
+    G3[Product/Traffic Aggregates]
+  end
+
+  subgraph Platform [Platform (future)]
+    O[Orchestration (Airflow/Dagster)]
+    M[Monitoring (Grafana/metrics)]
+  end
+
+  A --> B
+  K -. later .-> B
+  B --> V
+  V -->|valid| S
+  V -->|invalid| DLQ
+  S --> G1
+  S --> G2
+  S --> G3
+  O -. schedules .- B
+  M -. observability .- B
