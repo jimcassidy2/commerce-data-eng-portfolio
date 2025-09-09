@@ -1,6 +1,4 @@
-### Architecture
 ```mermaid
-
 flowchart LR
   subgraph Ingestion [Bronze: Ingestion]
     A[Raw Clickstream CSV<br/>data/bronze/...]
@@ -9,7 +7,7 @@ flowchart LR
 
   subgraph Processing [Silver: Processing]
     B[Apache Beam<br/>Parse + Clean + Enrich]
-    V[Schema Validation<br/>(JSON Schema)]
+    V[Schema Validation (JSON Schema)]
     DLQ[[Dead-Letter Queue<br/>(invalid/unclean)]]
   end
 
@@ -38,4 +36,4 @@ flowchart LR
   S --> G3
   O -. schedules .- B
   M -. observability .- B
-  ```
+```
